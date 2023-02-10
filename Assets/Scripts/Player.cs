@@ -48,18 +48,20 @@ public class Player : MonoBehaviour
             //detectar la pos del touch
             //hacer un vector desde touch hasta player (vector normalizado)
             //añadir la direccion del vector a un addForce al player 
-        }*/        
+        }*/
 
+        Debug.DrawRay(transform.position, playerBody.velocity, Color.blue);
         if (Input.GetMouseButtonUp(0))
         {
             touchedPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             playerCurrentPos = transform.position;
+
             Debug.DrawLine(touchedPos, playerCurrentPos, Color.red, 5f);
 
 
 
             Vector2 vectorBetweenTouchAndPlayer = playerCurrentPos - touchedPos;
-            playerBody.AddForce(vectorBetweenTouchAndPlayer*115);
+            playerBody.AddForce(vectorBetweenTouchAndPlayer.normalized*100);
         }
         
     }
