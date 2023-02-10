@@ -9,9 +9,13 @@ public class ObstacleGenerator : MonoBehaviour
     private GameObject[] obstacleArray;
     private float respawnTimer;
     private float timer = 0;
+    private Rigidbody2D _player;
 
     private void Start()
     {
+        _player = GameObject.Find("Player").GetComponent<Rigidbody2D>();
+
+
         obstacleArray = new GameObject[10];
 
         for (int i = 0; i < obstacleArray.Length; i++)
@@ -36,7 +40,15 @@ public class ObstacleGenerator : MonoBehaviour
                 if (!child.activeSelf)
                 {
                     child.SetActive(true);
-                    StartCoroutine(ObstacleMovement(child));
+                    switch (child.tag)
+                    {
+                        case "Obstacle":
+                            StartCoroutine(ObstacleMovement(child));
+                            break;
+                        case "Barrier":
+                            StartCoroutine(BarrierMovement(child));
+                            break;
+                    }
                     break;
                 }
             }
@@ -57,10 +69,18 @@ public class ObstacleGenerator : MonoBehaviour
         yield return null;
     }
 
+    IEnumerator BarrierMovement(GameObject barrier)
+    {
+
+        while (barrier.activeSelf)
+        {
+            barrier.transform.localPosition = new Vector2(barrier.transform.localPosition.x, barrier.transform.localPosition.y - _player.velocity.magnitude * Time.deltaTime);
+            yield return new WaitForSeconds(0);
+        }
+        barrier.transform.position = new Vector2(obstacleGenerator.position.x, obstacleGenerator.position.y);
 
 
 
 
-
-
+    }
 }
