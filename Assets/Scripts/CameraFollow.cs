@@ -5,9 +5,13 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
 
-    [SerializeField] private RectTransform playerTransform;
+    private RectTransform playerTransform;
     [SerializeField] private float camSpeed;
 
+    private void Start()
+    {
+        playerTransform = GameManager.GetPlayer().GetComponent<RectTransform>();
+    }
 
     // Update is called once per frame
     void Update()

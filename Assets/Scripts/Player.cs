@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
     private Vector2 playerCurrentPos, touchedPos;
     private Rigidbody2D playerBody;
 
@@ -65,4 +66,7 @@ public class Player : MonoBehaviour
         }
         
     }
+
+
+
 }

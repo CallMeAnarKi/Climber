@@ -2,21 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class GameManager
+public class GameManager : MonoBehaviour
 {
+    private static GameManager _gameManager;
+    private static GameObject player;
 
     public enum Difficulty{ VeryEasy, Easy, Normal, Hard, VeryHard};
     private static Difficulty levelDifficulty;
     private static int playerScore = 0;
-    private static float minRandom;
-    private static float maxRandom;
+    private static float minRandomY;
+    private static float maxRandomY;
+    private static float minRandomX;
+    private static float maxRandomX;
 
-    static private void Awake()
+
+    private void Awake()
     {
-        
+        if (_gameManager ==  null)
+        {
+            _gameManager = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        if (player == null)
+        {
+            player = GameObject.Find("Player");
+        }
     }
 
-    static public (float, float) GenerateDifficulty()
+    static public (float, float, float, float) GenerateDifficulty()
     {
         if (playerScore < 500)
         {
@@ -30,8 +43,12 @@ public static class GameManager
         switch (levelDifficulty)
         {
             case Difficulty.VeryEasy:
-                minRandom = 1;
-                maxRandom = 3;
+
+                minRandomX = 1;
+                maxRandomX = 3;
+
+                minRandomY = 3;
+                maxRandomY = 8;
                 break;
             case Difficulty.Easy:
                 break;
@@ -45,6 +62,14 @@ public static class GameManager
                 break;
         }
 
-        return (minRandom, maxRandom);
+        return (minRandomX, maxRandomX, minRandomY, maxRandomY);
     }
+    
+    static public GameObject GetPlayer()
+    {
+        return player;
+    }
+
+
+
 }
