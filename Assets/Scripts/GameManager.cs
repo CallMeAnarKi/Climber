@@ -1,22 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     private static GameManager _gameManager;
     private static GameObject player;
 
-    //barrier 
-    [SerializeField] private GameObject barrierGO;
-    public static GameObject[] barrierArray;
-    [SerializeField] private GameObject barrierParent;
 
-    //piece
-    [SerializeField] private GameObject pieceGO;
-    static public GameObject[] pieceArray;
-    [SerializeField] private GameObject pieceParent;
-    static private GameObject lastPieceSet;
 
     public enum Difficulty{ VeryEasy, Easy, Normal, Hard, VeryHard};
     private static Difficulty levelDifficulty;
@@ -32,36 +24,24 @@ public class GameManager : MonoBehaviour
             _gameManager = this;
             DontDestroyOnLoad(gameObject);
         }
-        if (player == null)
-        {
-            player = GameObject.Find("Player");
-        }
+
 
 
     }
+
+
 
     private void Start()
     {
         //Move this function to scene management
-        CreateLevel();
+        //CreateLevel();
     }
 
     //Call this function when Scene management implemented
+    /*
     private void CreateLevel()
     {
-        barrierArray = new GameObject[50];
-        for (int i = 0; i < barrierArray.Length; i++)
-        {
-            barrierArray[i] = Instantiate(barrierGO, new Vector2(1000, 1000), Quaternion.identity, barrierParent.transform);
-            barrierArray[i].SetActive(false);
-        }
 
-        pieceArray = new GameObject[4];
-        for (int i = 0; i < pieceArray.Length; i++)
-        {
-            pieceArray[i] = Instantiate(pieceGO, new Vector2(2000, 2000), Quaternion.identity, pieceParent.transform);
-            pieceArray[i].SetActive(false);
-        }
 
         for (int i = 0; i < pieceArray.Length-1; i++)
         {
@@ -82,11 +62,14 @@ public class GameManager : MonoBehaviour
                 pieceArray[i].GetComponentInChildren<PoblatePiece>().SetBarriers(pieceArray[i].GetComponent<Transform>());                
             }
         }
-    }
+    }*/
 
-    static public void NextPiece()
+    private void Update()
     {
-
+        if (Input.GetMouseButtonUp(1))
+        {
+            SceneManager.LoadScene(1);
+        }
     }
 
 
@@ -129,6 +112,13 @@ public class GameManager : MonoBehaviour
     static public GameObject GetPlayer()
     {
         return player;
+    }    
+    static public void SetPlayer()
+    {
+        if (player == null)
+        {
+            player = GameObject.Find("Player");
+        }
     }
 
 

@@ -67,6 +67,12 @@ public class Player : MonoBehaviour
         
     }
 
-
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.transform.position.y < transform.position.y && collision.CompareTag("Barrier"))
+        {
+            PoblatePiece.SetNewBarrier(collision.gameObject);
+        }  
+    }
 
 }
