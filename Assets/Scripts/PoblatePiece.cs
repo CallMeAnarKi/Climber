@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class PoblatePiece : MonoBehaviour
 {
-    static public PoblatePiece _intance;
-
-
+    static public PoblatePiece _instance;
      
     //barrier 
     [SerializeField] private GameObject barrierGO;
@@ -16,9 +14,9 @@ public class PoblatePiece : MonoBehaviour
 
     //piece
     [SerializeField] private GameObject pieceGO;
-    private GameObject[] pieceArray;
+    static private GameObject[] pieceArray;
     [SerializeField] private GameObject pieceParent;
-    private GameObject lastPieceSet;
+    static private GameObject lastPieceSet;
 
 
     static private RectTransform playerRef;
@@ -30,25 +28,22 @@ public class PoblatePiece : MonoBehaviour
     static private float maxRandomY;
     static private float randomY;
     static private float randomX;
-    static private bool lastBarrierPlaced;
 
 
     // Start is called before the first frame update
     void Awake()
     {
-        if (_intance == null)
+        if (_instance == null)
         {
-            _intance = this;
+            _instance = this;
         }
-
-        GameManager.SetPlayer();
-
+        /*
         barrierArray = new GameObject[40];
         for (int i = 0; i < barrierArray.Length; i++)
         {
             barrierArray[i] = Instantiate(barrierGO, new Vector2(1000, 1000), Quaternion.identity, barrierParent.transform);
             barrierArray[i].SetActive(false);
-        }
+        }*/
 
         pieceArray = new GameObject[4];
         for (int i = 0; i < pieceArray.Length; i++)
@@ -57,19 +52,20 @@ public class PoblatePiece : MonoBehaviour
             pieceArray[i].SetActive(false);
         }
 
-        barrierRT = (RectTransform)barrierGO.transform;
+        //barrierRT = (RectTransform)barrierGO.transform;
         playerRef = GameManager.GetPlayer().GetComponent<RectTransform>();
         pieceRT = pieceArray[0].GetComponentInChildren<RectTransform>();
 
     }
     private void Start()
     {
-        SetDifficulty();
+        //SetDifficulty();
         StartLvl();
     }
 
     private void StartLvl()
     {
+        //Set background and map colisions
         for (int i = 0; i < pieceArray.Length - 1; i++)
         {
             if (!pieceArray[i].activeSelf)
@@ -88,10 +84,11 @@ public class PoblatePiece : MonoBehaviour
                 pieceArray[i].SetActive(true);
             }
         }
-
+ 
+        /*
         RandomizeNextBarrier();
 
-        //Set the first one barrier 
+        //Set the first barrier 
         if (previousBarrier == null)
         {
             for (int i = 0; i < barrierArray.Length; i++)
@@ -130,7 +127,7 @@ public class PoblatePiece : MonoBehaviour
                     break;
                 }
             }
-        }
+        }*/
         
     }
 
@@ -175,10 +172,20 @@ public class PoblatePiece : MonoBehaviour
         maxRandomY = GameManager.GenerateDifficulty().Item3;
     }
 
-    static public void SetNewPiece()
+    static public void SetNewPiece(GameObject pieceObjective)
     {
-        //hacer k pille la pieza a mas altura y le concatene la siguiente
-        //esto se llama desde el player
+        pieceObjective.SetActive(false);
+
+        for (int i = 0; i < pieceArray.Length; i++)
+        {
+            if (!pieceArray[i].activeSelf)
+            {
+                pieceArray[i].transform.position = new Vector2(0, lastPieceSet.transform.position.y + lastPieceSet.GetComponentInChildren<RectTransform>().rect.height);
+                lastPieceSet = pieceArray[i];
+                lastPieceSet.SetActive(true);
+                break;
+            }
+        }
     }
 
 
