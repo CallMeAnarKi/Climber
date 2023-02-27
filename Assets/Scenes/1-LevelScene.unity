@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &130676766 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8918518957472846714, guid: 85f5fbf647d1baa40b7a5dc9222449a9, type: 3}
-  m_PrefabInstance: {fileID: 1109578010}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &223121230
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,7 +511,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1243025864}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c79df18988ae894ca8d628344c15ab7, type: 3}
   m_Name: 
@@ -558,7 +553,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnerParent: {fileID: 1128360314}
   camTransform: {fileID: 519420032}
-  playerRef: {fileID: 130676766}
   padGO: {fileID: 4596705246465094292, guid: 2e7396b6757620549aff9eabf80a9646, type: 3}
   padParent: {fileID: 223121230}
 --- !u!1 &1441990323

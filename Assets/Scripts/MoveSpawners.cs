@@ -21,7 +21,8 @@ public class MoveSpawners : MonoBehaviour
     static private RectTransform padRT;
 
     static private GameObject previousPad;
-    private float pathPos;
+    static private int lastPathPos;
+    static private int repeatedPathCount;
 
     private void Awake()
     {
@@ -43,6 +44,7 @@ public class MoveSpawners : MonoBehaviour
         }
 
         playerRef = GameManager.GetPlayer();
+        repeatedPathCount = 0;
     }
 
     private void Start()
@@ -67,11 +69,12 @@ public class MoveSpawners : MonoBehaviour
 
     static private float PathPos()
     {
-        int pathSelected = Random.Range(0, 3);
+        int pathSelected = SelectPath();
+        lastPathPos = pathSelected;
 
         if (pathSelected == 0)
         {
-            return spawner1.position.x;
+            return spawner1.position.x;            
         }
         else if (pathSelected == 1)
         {
@@ -82,6 +85,27 @@ public class MoveSpawners : MonoBehaviour
             return spawner3.position.x;
         }
         return 0;
+    }
+
+    static private int SelectPath()
+    {
+        int path = Random.Range(0, 3);        
+
+        if (path != lastPathPos)
+        {
+            repeatedPathCount = 0;
+        }
+        else
+        {
+            lastPathPos = path;
+            repeatedPathCount++;
+        }
+
+        while (path == lastPathPos && repeatedPathCount >= 2)
+        {
+            path = Random.Range(0, 3);
+        }
+        return path;
     }
 
     static public void SetNewPad(GameObject padObjective)
