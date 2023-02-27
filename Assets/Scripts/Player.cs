@@ -13,6 +13,10 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask backgroundLayer;
     private Ray ray;
 
+    private void Awake()
+    {
+        GameManager.SetPlayer();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -68,11 +72,23 @@ public class Player : MonoBehaviour
     }
 
     private void OnTriggerExit2D(Collider2D collision)
-    {
+    {/*
         if (collision.transform.position.y < transform.position.y && collision.CompareTag("Barrier"))
         {
             PoblatePiece.SetNewBarrier(collision.gameObject);
-        }  
+            return;
+        }  */        
+        if (collision.transform.position.y < transform.position.y && collision.CompareTag("Piece"))
+        {
+            PoblatePiece.SetNewPiece(collision.transform.parent.gameObject);
+            return;
+        }
+        if (collision.transform.position.y < transform.position.y && collision.CompareTag("Pad"))
+        {
+            MoveSpawners.SetNewPad(collision.gameObject);
+            return;
+        }
+
     }
 
 }
