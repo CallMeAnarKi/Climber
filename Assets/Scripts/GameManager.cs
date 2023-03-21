@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
     private static GameManager _gameManager;
     private static GameObject player;
+    [SerializeField] private PlayerInput _playerInput;
 
+    static private int score = 0;
 
 
     public enum Difficulty{ VeryEasy, Easy, Normal, Hard, VeryHard};
@@ -64,11 +67,24 @@ public class GameManager : MonoBehaviour
         }
     }*/
 
-    private void Update()
+    //----------- UI action map -----------//
+    public void OnTouchUI(InputAction.CallbackContext context) 
     {
-        if (Input.GetMouseButtonUp(1))
+        if (context.started)
         {
             SceneManager.LoadScene(1);
+            _playerInput.actions.FindActionMap("UI").Disable();
+            _playerInput.actions.FindActionMap("Play").Enable();
+        }
+    }
+
+
+    //----------- Play action map -----------//
+    public void OnTouchPlay(InputAction.CallbackContext context)
+    {
+        if (context.canceled)
+        {
+            player.GetComponent<Player>().PlayerMove(Mouse.current.position.ReadValue());
         }
     }
 
@@ -81,7 +97,7 @@ public class GameManager : MonoBehaviour
         }
         else if( playerScore >= 500 && playerScore < 1000)
         {
-            
+            levelDifficulty = Difficulty.Easy;
         }
 
         switch (levelDifficulty)
@@ -95,6 +111,7 @@ public class GameManager : MonoBehaviour
                 maxRandomY = 8;
                 break;
             case Difficulty.Easy:
+                
                 break;
             case Difficulty.Normal:
                 break;
@@ -109,6 +126,19 @@ public class GameManager : MonoBehaviour
         return (widthBetweenBarriers, minRandomY, maxRandomY);
     }
     
+    static public void IncreaseScore()
+    {
+        score += 100;
+        //Debug.Log(score);
+
+        if (score >= 500)
+        {
+            ObstacleGenerator.SetFirstRock();
+        }
+    }
+
+
+
     static public GameObject GetPlayer()
     {
         return player;

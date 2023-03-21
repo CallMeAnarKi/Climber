@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -25,9 +26,10 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    /*void Update()
     {
-        /*if (Input.touchCount > 0)
+        
+        if (Input.touchCount > 0)
         {
             touch = Input.GetTouch(0);
 
@@ -53,31 +55,38 @@ public class Player : MonoBehaviour
             //detectar la pos del touch
             //hacer un vector desde touch hasta player (vector normalizado)
             //añadir la direccion del vector a un addForce al player 
-        }*/
+        }
 
+
+        
+    }*/
+
+    public void PlayerMove(Vector2 mousePos)
+    {
         Debug.DrawRay(transform.position, playerBody.velocity, Color.blue);
-        if (Input.GetMouseButtonUp(0))
-        {
-            touchedPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            touchedPos = Camera.main.ScreenToWorldPoint(mousePos);
             playerCurrentPos = transform.position;
 
             Debug.DrawLine(touchedPos, playerCurrentPos, Color.red, 5f);
 
 
-
             Vector2 vectorBetweenTouchAndPlayer = playerCurrentPos - touchedPos;
-            playerBody.AddForce(vectorBetweenTouchAndPlayer.normalized*100);
-        }
-        
+            playerBody.AddForce(vectorBetweenTouchAndPlayer.normalized * 100);
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {/*
-        if (collision.transform.position.y < transform.position.y && collision.CompareTag("Barrier"))
+
+
+
+private void OnTriggerExit2D(Collider2D collision)
+    {
+        GameManager.IncreaseScore();       
+        
+        if (collision.transform.position.y < transform.position.y && collision.CompareTag("Obstacle"))
         {
-            PoblatePiece.SetNewBarrier(collision.gameObject);
+            ObstacleGenerator.SetNewRock(collision.gameObject);
             return;
-        }  */        
+        }
         if (collision.transform.position.y < transform.position.y && collision.CompareTag("Piece"))
         {
             PoblatePiece.SetNewPiece(collision.transform.parent.gameObject);
@@ -85,7 +94,7 @@ public class Player : MonoBehaviour
         }
         if (collision.transform.position.y < transform.position.y && collision.CompareTag("Pad"))
         {
-            MoveSpawners.SetNewPad(collision.gameObject);
+            ObstacleGenerator.SetNewPad(collision.gameObject);
             return;
         }
 

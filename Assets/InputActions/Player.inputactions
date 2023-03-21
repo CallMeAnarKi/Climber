@@ -1,0 +1,73 @@
+{
+    "name": "Player",
+    "maps": [
+        {
+            "name": "Play",
+            "id": "9bf65a56-1905-4086-a8e1-195253fa4b13",
+            "actions": [
+                {
+                    "name": "Touch",
+                    "type": "Button",
+                    "id": "a9aa28e2-fb9b-4ecd-b31f-e50466285551",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "3d5dee9c-5710-4ed2-b7e8-dacab6503ed1",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Touch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "44cb158d-4781-4830-9106-023b0a6c0784",
+                    "path": "<Touchscreen>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Touch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "57f71bc0-8fc2-46ef-9a3b-360387bbd886",
+            "actions": [
+                {
+                    "name": "Touch",
+                    "type": "Button",
+                    "id": "fc7412f4-9aee-4af6-a8bf-a83e3e4a8bec",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2e99d74b-a6f7-4102-9de1-668c983f80f9",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Touch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
