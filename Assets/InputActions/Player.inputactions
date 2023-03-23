@@ -13,6 +13,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "7be2c59e-6215-4634-82b2-f58f5a182c0a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "BORRAR",
+                    "type": "Button",
+                    "id": "490bddb9-2f00-4b25-b2f2-471545fdad27",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -30,11 +48,33 @@
                 {
                     "name": "",
                     "id": "44cb158d-4781-4830-9106-023b0a6c0784",
-                    "path": "<Touchscreen>/position",
+                    "path": "<Touchscreen>/Press",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Touch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5f7fee84-3fcf-49b1-a3ec-fb03903bc25d",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Hold(duration=0.3)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cbb018b8-8af5-4715-80a3-8100b555b02b",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BORRAR",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

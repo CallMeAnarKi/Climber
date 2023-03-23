@@ -226,6 +226,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: fc7412f4-9aee-4af6-a8bf-a83e3e4a8bec
     m_ActionName: UI/Touch[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 392349287}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: OnJumpPlay
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7be2c59e-6215-4634-82b2-f58f5a182c0a
+    m_ActionName: Play/Jump[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 392349287}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: BORRAR
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 490bddb9-2f00-4b25-b2f2-471545fdad27
+    m_ActionName: Play/BORRAR[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: UI

@@ -88,6 +88,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void OnJumpPlay(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            player.GetComponent<Player>().PlayerJump();
+        }
+    }
+
+    public void BORRAR(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            player.GetComponent<Player>().ReactivateCollider();
+        }
+    }
+
 
     static public (float, float, float) GenerateDifficulty()
     {

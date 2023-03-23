@@ -8,7 +8,9 @@ public class Player : MonoBehaviour
 
     private Vector2 playerCurrentPos, touchedPos;
     private Rigidbody2D playerBody;
-
+    [SerializeField] private BoxCollider2D playerBC;
+    private bool isJumping;
+    
     private Touch touch;
 
     [SerializeField] private LayerMask backgroundLayer;
@@ -63,7 +65,9 @@ public class Player : MonoBehaviour
 
     public void PlayerMove(Vector2 mousePos)
     {
-        Debug.DrawRay(transform.position, playerBody.velocity, Color.blue);
+        if (!isJumping)
+        {
+            Debug.DrawRay(transform.position, playerBody.velocity, Color.blue);
 
             touchedPos = Camera.main.ScreenToWorldPoint(mousePos);
             playerCurrentPos = transform.position;
@@ -73,8 +77,21 @@ public class Player : MonoBehaviour
 
             Vector2 vectorBetweenTouchAndPlayer = playerCurrentPos - touchedPos;
             playerBody.AddForce(vectorBetweenTouchAndPlayer.normalized * 100);
+        }
     }
 
+    public void PlayerJump()
+    {
+        isJumping = true;
+        playerBC.enabled = !playerBC.enabled;
+    }
+
+    //ESTO SE LLAMARA DESDE LA NIMACION DE SALTO
+    public void ReactivateCollider()
+    {
+        isJumping = false;
+        playerBC.enabled = !playerBC.enabled;
+    }
 
 
 
